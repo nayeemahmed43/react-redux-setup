@@ -66,3 +66,63 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+--------------------------------------------------------------------------------------------
+
+## Directory Structure
+```txt
++
++---src
+|   +---action-types
+|   |   
+|   +---actions
+|   |    
+|   +---assets
+|   |       
+|   +---components
+|   |   |
+|   |   +---basic
+|   |   |
+|   |   +---composite
+|   |   |
+|   +---constants
+|   |
+|   +---reducers
+|   |
+|   +---router
+|   |   |
+|   |   +---app-router
+|   |   |
+|   |   +---auth-router
+|   |   |
+|   +---store
+|   |
+|   +---utils
+```
+
+### action-types
+
+'action-types' folder contains all the action types
+
+### actions 
+
+'actions' folder contains all the actions which is dispatched to the reducer
+
+### reducers
+
+reducer function modify the state of the redux store. There can be several reducer functions. All the reducer functions are accumulated in the file called 'root-reducer'
+
+### store
+
+store holds all the redux state
+
+### assets
+
+This filder contains the asset like image
+
+### components
+
+There are two types component 'basic' and 'composite'. basic components are atomic component which are reusable and used by the composite component.
+
+
+
