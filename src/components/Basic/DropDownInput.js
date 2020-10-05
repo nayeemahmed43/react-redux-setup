@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MultilineTextFields() {
+export default function MultilineTextFields(props) {
   const classes = useStyles();
   const [shipmentType, setShipmentType] = useState('FTL (Full Truck Load)');
 
@@ -55,7 +55,7 @@ export default function MultilineTextFields() {
                   //defaultValue="FTL (Full Truck Load)"
                   className={classes.textField}
                   value={shipmentType}
-                  onChange={handleChange}
+                  onChange={props.handleChange}
                   variant="outlined"
                 >
                   {shipmentTypes.map((option) => (

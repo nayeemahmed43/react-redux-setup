@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { fade, withStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -61,17 +61,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
-    formFooter: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginLeft: '25px',
-      marginRight: '125px',
-    },
-    // bullet: {
-    //     display: 'inline-block',
-    //     margin: '0 2px',
-    //     transform: 'scale(0.8)',
-    // },
     title: {
         fontSize: 14,
     },
@@ -86,62 +75,117 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
     const classes = useStyles();
-    //const bull = <span className={classes.bullet}>•</span>;
+    const [freightData, setFreightData] = useState({
+      pickupLocation:"",
+      deliveryLocation:"",
+      pickupDate:"",
+      deliveryDate:"",
+      pickupStartingTime:"",
+      pickupEndingTime:"",
+      deliveryStartingTime:"",
+      deliveryEndingTime:"",
+      shipmentType:""
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault()
+      console.log(freightData)
+
+    }
 
     return (
       <div>
         <NavBar />
+        <Typography variant="h4" style={{marginTop: "5%"}}>
+          The Best Online Freight Marketplace
+        </Typography>
+        <Typography variant="h6" style={{marginTop: "2%",marginBottom: "2%"}}>
+          One stop solution to post and bid on freight requests from multiple platforms
+        </Typography>
+        <Button style={{ backgroundColor: "rgb(0 113 205)", color: "#fff" }}>request a quote</Button>
+        <Button style={{ color: "rgb(0 113 205)", border: "2px solid rgb(0 113 205)" }}>request a quote</Button>
         <Card className={classes.root}>
           <CardContent>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
               {/* <CustomizedInputs /> */}
               <FormControl className={classes.margin}>
                 <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
                   Pickup location
                 </InputLabel>
-                <BootstrapInput id="bootstrap-input" />
+                <BootstrapInput 
+                id="bootstrap-input" 
+                value= {freightData.pickupLocation}
+                //name="pickupLocation"
+                onChange={(e) => setFreightData({...freightData,pickupLocation: e.target.value})}
+                />
               </FormControl>
-              <DatePickers />
+              <DatePickers 
+              label="Pickup date"
+              //name="pickupDate"
+              //value={freightData.pickupDate}
+              handleDate={(e) => setFreightData({...freightData,pickupDate: e.target.value})}
+              />
               <div style={{margin: 'auto 0', lineHeight: "90%"}}>
                 <small>+/- 1 day</small> <br/>
                 <small>Charge</small>
               </div>
-              <TimePickers />
-              <TimePickers />
-              <MultilineTextFields />
+              <TimePickers 
+              label="Pickup time"
+              handleTime={(e) => setFreightData({...freightData,pickupStartingTime: e.target.value})}
+              />
+              <TimePickers 
+              handleTime={(e) => setFreightData({...freightData,pickupEndingTime: e.target.value})}
+              />
+              <MultilineTextFields 
+              handleChange={(e) => setFreightData({...freightData, shipmentType: e.target.value})}
+              />
               <FormControl className={classes.margin}>
                 <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
                   Delivery location
                 </InputLabel>
-                <BootstrapInput id="bootstrap-input" />
+                <BootstrapInput 
+                id="bootstrap-input" 
+                //value= {freightData.deliveryLocation}
+                //name="pickupLocation"
+                onChange={(e) => setFreightData({...freightData,deliveryLocation: e.target.value})}
+                />
               </FormControl>
-              <DatePickers />
+              <DatePickers 
+              label="Delivery date"
+              handleDate={(e) => setFreightData({...freightData,deliveryDate: e.target.value})}
+              />
               <div style={{margin: 'auto 0', lineHeight: "90%"}}>
                 <small>+/- 1 day</small> <br/>
                 <small>Charge</small>
               </div>
-              <TimePickers />
-              <TimePickers />
+              <TimePickers 
+              label="Delivery time"
+              handleTime={(e) => setFreightData({...freightData,deliveryStartingTime: e.target.value})}
+              />
+              <TimePickers 
+              handleTime={(e) => setFreightData({...freightData,pickupEndingTime: e.target.value})}
+              />
               <CheckboxLabels />
-            </form>
-          </CardContent>
-          <div className={classes.formFooter}>
+              <div style={{display: 'flex',justifyContent: 'space-between'}}>
           <div>
             <p><b>REQUEST ANOTHER QUOTE</b></p>
             <small>Quoted prices are indicative only</small>
           </div>
 
-          <div style={{display:'flex', justifyContent:'space-between'}}>
+          <div style={{display:'flex', marginLeft:"450px"}}>
             <div>
               <h2>$ 2440.87</h2>
               <small>(incl. tax & fuel)</small>
             </div>
             <CardActions>
-            <Button size="small" style={{ backgroundColor: "skyblue", color: "#fff" }}>ACCEPT & ORDER</Button>
+            <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff" }} type="submit">ACCEPT & ORDER</Button>
           </CardActions>
           </div>
           
           </div>
+            </form>
+          </CardContent>
+         
         </Card>
       </div>
     );

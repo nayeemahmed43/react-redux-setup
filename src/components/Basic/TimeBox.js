@@ -15,19 +15,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TimePickers() {
+export default function TimePickers(props) {
   const classes = useStyles();
 
   return (
       <form className={classes.container} noValidate>
           <FormControl>
               <InputLabel shrink htmlFor="bootstrap-input">
-                  Pickup time
+                  {props.label}
               </InputLabel>
               <TextField
                   id="time"
                   type="time"
                   defaultValue="07:30"
+                  onChange={props.handleTime}
                   className={classes.textField}
                   InputLabelProps={{
                       shrink: true,

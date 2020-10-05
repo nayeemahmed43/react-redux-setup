@@ -16,20 +16,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DatePickers() {
+export default function DatePickers(props) {
   const classes = useStyles();
 
   return (
     <form className={classes.container} noValidate>
       <FormControl>
         <InputLabel shrink htmlFor="bootstrap-input">
-          Pickup date
+          {props.label}
          </InputLabel>
         <TextField
           id="date"
           type="date"
           defaultValue="2017-05-24"
           className={classes.textField}
+          onChange={props.handleDate}
           InputLabelProps={{
             shrink: true,
           }}
