@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     marginTop: theme.spacing(3),
+    marginRight: '10px',
     width: 110,
     border: '1px solid #ced4da'
   },
@@ -21,7 +22,7 @@ export default function TimePickers(props) {
   return (
       <form className={classes.container} noValidate>
           <FormControl>
-              <InputLabel shrink htmlFor="bootstrap-input">
+              <InputLabel shrink htmlFor="bootstrap-input" style={{marginTop:"8px"}}>
                   {props.label}
               </InputLabel>
               <TextField

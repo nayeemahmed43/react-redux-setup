@@ -23,38 +23,34 @@ const shipmentTypes = [
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
-      //margin: theme.spacing(1),
       width: '25ch',
     },
   },
   textField: {
     marginTop: theme.spacing(3),
-    // width: 200,
-    // border: '1px solid #ced4da'
+    padding: 0
   },
 }));
 
 export default function MultilineTextFields(props) {
   const classes = useStyles();
-  const [shipmentType, setShipmentType] = useState('FTL (Full Truck Load)');
+  // const [shipmentType, setShipmentType] = useState('FTL (Full Truck Load)');
 
-  const handleChange = (event) => {
-    setShipmentType(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setShipmentType(event.target.value);
+  // };
 
   return (
       <form className={classes.root} noValidate autoComplete="off">
           <FormControl>
-              <InputLabel shrink htmlFor="bootstrap-input">
+              <InputLabel shrink htmlFor="bootstrap-input" style={{marginTop:"8px"}}>
                   Shipment Type
               </InputLabel>
               <TextField
                   id="outlined-select-shipmentType"
                   select
-                  //label="Select"
-                  //defaultValue="FTL (Full Truck Load)"
                   className={classes.textField}
-                  value={shipmentType}
+                  value={props.value}
                   onChange={props.handleChange}
                   variant="outlined"
                 >
