@@ -13,12 +13,14 @@ import TimePickers from './Basic/TimeBox';
 import MultilineTextFields from './Basic/DropDownInput';
 import CheckboxLabels from './Basic/CheckboxLabels';
 import InputBase from '@material-ui/core/InputBase';
+import Grid from '@material-ui/core/Grid';
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
       marginTop: theme.spacing(2),
     },
+    flexGrow: 1,
   },
   input: {
     borderRadius: 2,
@@ -52,8 +54,9 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    border: '1px solid blue',
+    border: '1px solid rgb(0 113 205)',
     margin: '5% 10% 10% 10%',
+    paddingLeft: '25px',
   },
   form: {
     display: 'flex',
@@ -109,7 +112,10 @@ const Home = () => {
       <Card className={classes.root}>
         <CardContent>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <FormControl className={classes.margin}>
+
+          <Grid container spacing={3}>
+          <Grid item xs={12} sm={3}>
+          <FormControl className={classes.margin}>
               <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
                 Pickup location
                 </InputLabel>
@@ -120,14 +126,19 @@ const Home = () => {
                 onChange={(e) => setFreightData({ ...freightData, pickupLocation: e.target.value })}
               />
             </FormControl>
-            <DatePickers
+          </Grid>
+         
+          <Grid item xs={6} sm={3}>
+          <DatePickers
               label="Pickup date"
               handleDate={(e) => setFreightData({ ...freightData, pickupDate: e.target.value })}
             />
-            <div style={{ margin: 'auto 20px auto 10px' }}>
+          </Grid>
+          <div style={{ margin: 'auto 20px auto 10px' }}>
               <small><b>+/-1 day</b></small> <br />
               <small style={{color:"rgb(0 113 205)"}}>Change</small>
             </div>
+            
             <TimePickers
               label="Pickup time"
               handleTime={(e) => setFreightData({ ...freightData, pickupStartingTime: e.target.value })}
@@ -164,23 +175,26 @@ const Home = () => {
             <TimePickers
               handleTime={(e) => setFreightData({ ...freightData, pickupEndingTime: e.target.value })}
             />
-            <CheckboxLabels />
-            <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-              <div style={{lineHeight: '80%', marginTop: "10px"}}>
-                <p><b>REQUEST ANOTHER QUOTE</b></p>
+            <div style={{marginTop: "20px"}}><CheckboxLabels /></div>
+
+            <div style={{ display: 'flex' }}>
+              <div style={{lineHeight: '50%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
+                <p style={{color:"rgb(0 113 205)"}}><b>REQUEST ANOTHER QUOTE</b></p>
                 <small>Quoted prices are indicative only</small>
               </div>
 
-              <div style={{ display: 'flex', marginLeft: "450px", lineHeight: '80%' }}>
+              <div style={{ display: 'flex', marginLeft: '535px', marginTop: '8px', lineHeight: '50%' }}>
                 <div>
-                  <h2>$ 2440.87</h2>
+                  <h3>$ 2440.87</h3>
                   <small>(incl. tax & fuel)</small>
                 </div>
                 <CardActions>
-                  <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff" }} type="submit">ACCEPT & ORDER</Button>
+                  <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginTop: "10px" }} type="submit">ACCEPT & ORDER</Button>
                 </CardActions>
               </div>
             </div>
+          </Grid>
+
           </form>
         </CardContent>
       </Card>
