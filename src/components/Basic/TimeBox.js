@@ -7,12 +7,16 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    // [theme.breakpoints.down("md")]: {
+    //   width: "100%"
+    // }
+    //justifyContent: 'space-between',
   },
   textField: {
     marginTop: theme.spacing(3),
-    marginRight: '10px',
+    //marginRight: '10px',
     width: 110,
-    border: '1px solid #ced4da'
+    border: '1px solid #ced4da',
   },
 }));
 
@@ -22,7 +26,7 @@ export default function TimePickers(props) {
   return (
       <form className={classes.container} noValidate>
           <FormControl>
-              <InputLabel shrink htmlFor="bootstrap-input" style={{marginTop:"8px"}}>
+              <InputLabel shrink htmlFor="bootstrap-input" style={{marginTop:"8px", width:"100px"}}>
                   {props.label}
               </InputLabel>
               <TextField

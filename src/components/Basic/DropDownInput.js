@@ -23,12 +23,14 @@ const shipmentTypes = [
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
-      width: '25ch',
+      width: '22ch',
+      
     },
   },
   textField: {
     marginTop: theme.spacing(3),
-    padding: 0
+    border: '1px solid #ced4da',
+    
   },
 }));
 
@@ -52,7 +54,7 @@ export default function MultilineTextFields(props) {
                   className={classes.textField}
                   value={props.value}
                   onChange={props.handleChange}
-                  variant="outlined"
+                  //variant="outlined"
                 >
                   {shipmentTypes.map((option) => (
                       <MenuItem key={option.value} value={option.value}>

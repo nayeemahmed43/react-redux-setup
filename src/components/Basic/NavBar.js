@@ -6,17 +6,21 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { FilterNone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      background: "rgb(12 47 85)"
+      background: "rgb(12 47 85)",
     },
     menu: {
       display: 'flex',
       width: '30%',
       justifyContent: 'space-around',
       marginLeft: theme.spacing(15),
+      [theme.breakpoints.down("sm")]: {
+        display: 'none',
+      },
     },
     title: {
       flexGrow: 0.5,
@@ -41,13 +45,13 @@ const NavBar = () => {
                     </Typography>
                     
                     <div className={classes.menu}>
-                      <p>Solutions</p>
-                      <p>resources</p>
-                      <p>Company</p>
-                      <p>Pricing</p>
+                      <p style={{marginRight:"3%"}}>Solutions</p>
+                      <p style={{marginRight:"3%"}}>resources</p>
+                      <p style={{marginRight:"3%"}}>Company</p>
+                      <p style={{marginRight:"3%"}}>Pricing</p>
                     </div>
                     <Button color="inherit" style={{marginLeft: "auto"}}>LOG IN</Button>
-                    <Button color="inherit" style={{background: "rgb(0 113 205)", marginLeft:"30px"}}>SIGN UP</Button>
+                    <Button color="inherit" style={{background: "rgb(0 113 205)", marginLeft:"5%"}}>SIGN UP</Button>
                 </Toolbar>
             </AppBar>
         </div>

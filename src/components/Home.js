@@ -28,8 +28,8 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
     border: '1px solid #ced4da',
     fontSize: 14,
-    width: '250px',
-    padding: '7px 12px',
+    width: '160px',
+    padding: '7px 30px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
@@ -55,8 +55,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
     border: '1px solid rgb(0 113 205)',
-    margin: '5% 10% 10% 10%',
-    paddingLeft: '25px',
+    margin: '5% 6% 10% 6%',
+    //paddingLeft: '15px',
   },
   form: {
     display: 'flex',
@@ -70,6 +70,22 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: theme.spacing(1),
+  },
+  changeDate: {
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "40px"
+    }
+  },
+  cardFooter: {
+    [theme.breakpoints.up("lg")]: {
+      display: 'flex', 
+      marginLeft: '700px', 
+      marginTop: '8px', 
+      lineHeight: '50%' 
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: '60px', 
+    }
   },
  
 }));
@@ -106,15 +122,15 @@ const Home = () => {
         One stop solution to post and bid on freight requests from multiple platforms
         </Typography>
       <Button style={{ backgroundColor: "rgb(0 113 205)", color: "#fff" }}>Request a Quote</Button>
-      <Button style={{ color: "rgb(0 113 205)", border: "2px solid rgb(0 113 205)" }}>Find Freight Request</Button>
+      <Button style={{ color: "rgb(0 113 205)", border: "1px solid rgb(0 113 205)" }}>Find Freight Request</Button>
 
 
       <Card className={classes.root}>
         <CardContent>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
 
-          <Grid container spacing={3}>
-          <Grid item xs={12} sm={3}>
+          <Grid container spacing={1}>
+          <Grid item xs={12} sm={5} lg={2}>
           <FormControl className={classes.margin}>
               <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
                 Pickup location
@@ -128,29 +144,43 @@ const Home = () => {
             </FormControl>
           </Grid>
          
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={6} sm={3} lg={2}>
           <DatePickers
+              //className={classes.datePicker}
               label="Pickup date"
               handleDate={(e) => setFreightData({ ...freightData, pickupDate: e.target.value })}
             />
           </Grid>
-          <div style={{ margin: 'auto 20px auto 10px' }}>
+
+          <Grid item xs={6} sm={4} lg={2}>
+          <div className={classes.changeDate} style={{ margin: '15px 20px auto 20px' }} >
               <small><b>+/-1 day</b></small> <br />
               <small style={{color:"rgb(0 113 205)"}}>Change</small>
-            </div>
-            
-            <TimePickers
+          </div>
+          </Grid>
+          
+          <Grid item xs={4} sm={4} md={3} lg={2}>
+          <TimePickers
               label="Pickup time"
               handleTime={(e) => setFreightData({ ...freightData, pickupStartingTime: e.target.value })}
             />
+          </Grid>
+
+          <Grid item xs={4} sm={4} md={3} lg={2}>
             <TimePickers
               handleTime={(e) => setFreightData({ ...freightData, pickupEndingTime: e.target.value })}
             />
+          </Grid>
+
+          <Grid item xs={12} sm={8} md={6} lg={2}>
             <MultilineTextFields
               handleChange={(e) => setFreightData({ ...freightData, shipmentType: e.target.value })}
               value={freightData.shipmentType}
             />
-            <FormControl className={classes.margin}>
+          </Grid>
+            
+          <Grid item xs={12} sm={6} lg={2}>
+          <FormControl className={classes.margin}>
               <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
                 Delivery location
                 </InputLabel>
@@ -160,30 +190,45 @@ const Home = () => {
                 onChange={(e) => setFreightData({ ...freightData, deliveryLocation: e.target.value })}
               />
             </FormControl>
+          </Grid>
+
+          <Grid item xs={6} sm={3} lg={2}>
             <DatePickers
               label="Delivery date"
               handleDate={(e) => setFreightData({ ...freightData, deliveryDate: e.target.value })}
             />
-            <div style={{ margin: '18px 20px auto 10px' }}>
+          </Grid>
+
+          <Grid item xs={6} sm={2} lg={2}>
+          <div style={{ margin: '15px 20px auto 20px' }}>
               <small><b>+/-1 day</b></small> <br />
               <small style={{color:"rgb(0 113 205)"}}>Change</small>
             </div>
-            <TimePickers
+          </Grid>
+
+          <Grid item xs={4} sm={4} md={3} lg={2}>
+          <TimePickers
               label="Delivery time"
               handleTime={(e) => setFreightData({ ...freightData, deliveryStartingTime: e.target.value })}
             />
-            <TimePickers
+          </Grid>
+          <Grid item xs={4} sm={4} md={3} lg={2}>
+          <TimePickers
               handleTime={(e) => setFreightData({ ...freightData, pickupEndingTime: e.target.value })}
             />
-            <div style={{marginTop: "20px"}}><CheckboxLabels /></div>
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={2}>
+          <div style={{marginTop: "20px"}}><CheckboxLabels /></div>
+          </Grid>
 
             <div style={{ display: 'flex' }}>
-              <div style={{lineHeight: '50%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
+              <div style={{lineHeight: '100%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
                 <p style={{color:"rgb(0 113 205)"}}><b>REQUEST ANOTHER QUOTE</b></p>
                 <small>Quoted prices are indicative only</small>
               </div>
 
-              <div style={{ display: 'flex', marginLeft: '535px', marginTop: '8px', lineHeight: '50%' }}>
+              <div className={classes.cardFooter} >
                 <div>
                   <h3>$ 2440.87</h3>
                   <small>(incl. tax & fuel)</small>
