@@ -7,7 +7,7 @@ const UserDetail = () => {
 
     const [userDetail, setUserDetail] = useState({})
     
-        axios.get('https://petstore.swagger.io/v2/user/nayeem30')
+        axios.get('https://petstore.swagger.io/v2/user/nayeem12')
         .then(res => setUserDetail(res.data))
         .catch(error => {
             const errorMsg = error.message
@@ -20,19 +20,6 @@ const UserDetail = () => {
             <h3>Name: {userDetail.firstName} {userDetail.lastName}</h3>
             <h3>Email: {userDetail.email}</h3>
             <h3>Phone: {userDetail.phone}</h3>
-            <Button variant="contained">Default</Button>
-<Button variant="contained" color="primary">
-  Primary
-</Button>
-<Button variant="contained" color="secondary">
-  Secondary
-</Button>
-<Button variant="contained" disabled>
-  Disabled
-</Button>
-<Button variant="contained" color="primary" href="#contained-buttons">
-  Link
-</Button>
         </div>
     );
 };

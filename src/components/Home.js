@@ -14,6 +14,8 @@ import MultilineTextFields from './Basic/DropDownInput';
 import CheckboxLabels from './Basic/CheckboxLabels';
 import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid';
+import { connect } from 'react-redux';
+import { submitFreightData } from '../actions/freightFormActions'
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -91,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
   const [freightData, setFreightData] = useState({
     pickupLocation: "",
@@ -102,12 +104,15 @@ const Home = () => {
     pickupEndingTime: "",
     deliveryStartingTime: "",
     deliveryEndingTime: "",
-    shipmentType: "FTL (Full Truck Load)"
+    shipmentType: "FTL (Full Truck Load)",
+    fixedFrequentRoute: false
   });
+
+  const [requestQuote, stRequestQuote] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(freightData)
+    props.submitForm(freightData)
 
   }
 
@@ -219,23 +224,23 @@ const Home = () => {
           </Grid>
 
           <Grid item xs={12} md={6} lg={2}>
-          <div style={{marginTop: "20px"}}><CheckboxLabels /></div>
+          <div style={{marginTop: "20px"}}><CheckboxLabels handleCheckBox={() => setFreightData({ ...freightData, fixedFrequentRoute: true })}/></div>
           </Grid>
-
             <div style={{ display: 'flex' }}>
               <div style={{lineHeight: '100%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
                 <p style={{color:"rgb(0 113 205)"}}><b>REQUEST ANOTHER QUOTE</b></p>
                 <small>Quoted prices are indicative only</small>
               </div>
-
+              <div>
               <div className={classes.cardFooter} >
-                <div>
+                  <div>
                   <h3>$ 2440.87</h3>
                   <small>(incl. tax & fuel)</small>
-                </div>
+                  </div>
                 <CardActions>
                   <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginTop: "10px" }} type="submit">ACCEPT & ORDER</Button>
-                </CardActions>
+                </CardActions> 
+                </div>
               </div>
             </div>
           </Grid>
@@ -248,4 +253,9 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitForm: (freightData) => dispatch(submitFreightData(freightData))
+  }
+}
+export default connect(null,mapDispatchToProps)(Home);

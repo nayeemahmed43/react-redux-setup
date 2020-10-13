@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import UserForm from './components/UserForm';
 import UserDetail from './components/UserDetail';
 import Home from './components/Home';
-import DemoForm from './components/DemoForm';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
       <UserContainer /> */}
       {/* <UserForm /> */}
       {/* <UserDetail />  */}
-      <Home />
+      {/* <Home /> */}
+      <SignUp />
     </div>
     </Provider>
     
