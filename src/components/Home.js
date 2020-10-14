@@ -108,7 +108,7 @@ const Home = (props) => {
     fixedFrequentRoute: false
   });
 
-  const [requestQuote, stRequestQuote] = useState(false)
+  const [requestQuote, setRequestQuote] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -118,7 +118,7 @@ const Home = (props) => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <Typography variant="h4" style={{ marginTop: "5%" }}>
         The Best Online Freight Marketplace
@@ -226,7 +226,24 @@ const Home = (props) => {
           <Grid item xs={12} md={6} lg={2}>
           <div style={{marginTop: "20px"}}><CheckboxLabels handleCheckBox={() => setFreightData({ ...freightData, fixedFrequentRoute: true })}/></div>
           </Grid>
-            <div style={{ display: 'flex' }}>
+
+          {!requestQuote ? (<div style={{ display: 'flex' }}>
+            <div>
+            <small>Get an instant quote/price for your freight just by filling out the above information</small>
+            </div>
+            <div>
+              {/* <button onClick={() => setRequestQuote(true)}>test</button> */}
+              <CardActions>
+                  <Button 
+                  size="small" 
+                  style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginLeft: "80vh" }} 
+                  onClick={() => setRequestQuote(true)}
+                  type="submit">REQUEST QUOTE</Button>
+                </CardActions>
+            </div>
+          </div>) :
+
+            (<div style={{ display: 'flex' }}>
               <div style={{lineHeight: '100%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
                 <p style={{color:"rgb(0 113 205)"}}><b>REQUEST ANOTHER QUOTE</b></p>
                 <small>Quoted prices are indicative only</small>
@@ -242,7 +259,7 @@ const Home = (props) => {
                 </CardActions> 
                 </div>
               </div>
-            </div>
+            </div>)}
           </Grid>
 
           </form>

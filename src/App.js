@@ -8,6 +8,7 @@ import UserForm from './components/UserForm';
 import UserDetail from './components/UserDetail';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
+import { AppRoute } from './router/app-route';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       {/* <UserForm /> */}
       {/* <UserDetail />  */}
       {/* <Home /> */}
-      <SignUp />
+      <AppRoute />
+      {/* <SignUp /> */}
     </div>
     </Provider>
     

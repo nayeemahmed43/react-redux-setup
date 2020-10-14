@@ -7,11 +7,13 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { FilterNone } from '@material-ui/icons';
+import { Link, Router } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
       background: "rgb(12 47 85)",
+     
     },
     menu: {
       display: 'flex',
@@ -22,11 +24,24 @@ const useStyles = makeStyles((theme) => ({
         display: 'none',
       },
     },
+    menuItem: {
+      textDecoration: "none",
+      marginRight:"3%", 
+      color: "white"
+    },
+    signupBtn: {
+      background: "rgb(0 113 205)", 
+      marginLeft:"5%", 
+      textDecoration: "none", 
+      color: "white"
+    },
     title: {
       flexGrow: 0.5,
     },
     fontStyle: {
-      fontStyle: 'italic'
+      fontStyle: 'italic',
+      textDecoration: "none", 
+      color: "white"
     }
   }));
 
@@ -40,18 +55,20 @@ const NavBar = () => {
                     {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton> */}
-                    <Typography className={classes.fontStyle} variant="h6" >
+                    <Link to="/" className={classes.fontStyle}>
+                      <Typography variant="h6" >
                         Unique Transport
-                    </Typography>
+                      </Typography>
+                    </Link>
                     
                     <div className={classes.menu}>
-                      <p style={{marginRight:"3%"}}>Solutions</p>
-                      <p style={{marginRight:"3%"}}>resources</p>
-                      <p style={{marginRight:"3%"}}>Company</p>
-                      <p style={{marginRight:"3%"}}>Pricing</p>
+                    <a href="/solutions" className={classes.menuItem}><p>Solutions</p></a>
+                      <a href="/resources" className={classes.menuItem}><p>Resources</p></a>
+                      <a href="/company" className={classes.menuItem}><p>Company</p></a>
+                      <a href="/pricing" className={classes.menuItem}><p>Pricing</p></a>
                     </div>
                     <Button color="inherit" style={{marginLeft: "auto"}}>LOG IN</Button>
-                    <Button color="inherit" style={{background: "rgb(0 113 205)", marginLeft:"5%"}}>SIGN UP</Button>
+                    <Link to="/signup" className={classes.signupBtn}><Button color="inherit">SIGN UP</Button></Link>
                 </Toolbar>
             </AppBar>
         </div>

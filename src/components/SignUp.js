@@ -62,7 +62,7 @@ const SignUp = (props) => {
     const { handleSubmit } = props;
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className={classes.root}>
                 <h1>This is sign up page</h1>
 
@@ -75,7 +75,7 @@ const SignUp = (props) => {
 
                         <Grid container spacing={3}>
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                                 <Box className={classes.controlTitle}>
                                     Company Name <span class={classes.mendatory}>*</span>{" "}
                                 </Box>
@@ -87,7 +87,7 @@ const SignUp = (props) => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                                 <Box className={classes.controlTitle}>
                                     CVR - Company reg number <span class={classes.mendatory}>*</span>{" "}
                                 </Box>
@@ -111,7 +111,7 @@ const SignUp = (props) => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                             <Box className={classes.controlTitle}>
                                 Contact person <span class={classes.mendatory}>*</span>{" "}
                             </Box>
@@ -123,7 +123,7 @@ const SignUp = (props) => {
                                 className={classes.field}
                             />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                             <Field
                                 type="text"
                                 name="lastName"
@@ -133,7 +133,7 @@ const SignUp = (props) => {
                             />
                             </Grid>
                             
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                                 <Box className={classes.controlTitle}>
                                     Email <span class={classes.mendatory}>*</span>{" "}
                                 </Box>
@@ -147,7 +147,7 @@ const SignUp = (props) => {
                             </Grid>
 
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                             <Box className={classes.controlTitle}>
                                 Phone
                             </Box>
@@ -160,7 +160,7 @@ const SignUp = (props) => {
 
                             </Grid>
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                             <Box className={classes.controlTitle}>
                                 Password
                     </Box>
@@ -174,13 +174,13 @@ const SignUp = (props) => {
                             </Grid>
                            
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                             <Box className={classes.controlTitle}>
                                 Confirm password
                             </Box>
                             <Field
                                 type="password"
-                                name="password"
+                                name="re-password"
                                 component="input"
                                 placeholder="Re-type password"
                                 className={classes.field}
