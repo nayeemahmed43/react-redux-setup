@@ -10,13 +10,18 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     marginLeft: theme.spacing(4),
   },
+  inputLabel: {
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(1)
+  },
   textField: {
     marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(1),
     width: 140,
     borderRadius: 2,
     border: '1px solid #ced4da',
   },
+
 }));
 
 export default function DatePickers(props) {
@@ -25,6 +30,9 @@ export default function DatePickers(props) {
   return (
     <form className={classes.container} noValidate>
       <FormControl>
+      <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
+                  Shipment Type
+      </InputLabel>
         <TextField
           id="date"
           type="date"

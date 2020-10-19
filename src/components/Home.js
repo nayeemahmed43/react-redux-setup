@@ -78,12 +78,13 @@ const RenderDatePicker = ({ input }) => (
   </div>
 );
 
-const RenderTimePicker = ({ input }) => (
+const RenderTimePicker = ({ input,label }) => (
   <div>
     <TimePickers
       {...input}
       className="form-control"
       handleTime={time => input.onChange(time)}
+      label={label}
     />
   </div>
 );
@@ -170,6 +171,7 @@ const Home = (props) => {
               <Field 
                 name={"pickupStartingTime"} 
                 component={RenderTimePicker} 
+                label="Pickup time"
               />
               </Grid>
 
@@ -219,6 +221,7 @@ const Home = (props) => {
               <Field 
                 name={"deliveryStartingTime"} 
                 component={RenderTimePicker} 
+                label="Delivery time"
               />
               </Grid>
               <Grid item xs={4} sm={4} md={3} lg={2}>
