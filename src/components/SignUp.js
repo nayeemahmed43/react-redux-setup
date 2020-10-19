@@ -2,9 +2,6 @@ import React from 'react';
 import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { Field, reduxForm } from "redux-form";
-import NavBar from './Basic/NavBar'
-import { useSelector } from "react-redux";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,18 +54,18 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = (props) => {
     const classes = useStyles()
-    //const { signup } = useSelector((state) => state.form);
     console.log(props)
     const { handleSubmit } = props;
+
     return (
         <>
-            {/* <NavBar /> */}
             <div className={classes.root}>
+
                 <h1>This is sign up page</h1>
 
                 <div className={classes.paper}>
                     <Paper variant="outlined" />
-                    
+
                     <form className={classes.form} onSubmit={handleSubmit((signupValues) => {
                         console.log(signupValues)
                     })}>
@@ -112,27 +109,27 @@ const SignUp = (props) => {
                             </Grid>
 
                             <Grid item xs={12} md={6}>
-                            <Box className={classes.controlTitle}>
-                                Contact person <span class={classes.mendatory}>*</span>{" "}
-                            </Box>
-                            <Field
-                                type="text"
-                                name="firstName"
-                                placeholder="First name"
-                                component="input"
-                                className={classes.field}
-                            />
+                                <Box className={classes.controlTitle}>
+                                    Contact person <span class={classes.mendatory}>*</span>{" "}
+                                </Box>
+                                <Field
+                                    type="text"
+                                    name="firstName"
+                                    placeholder="First name"
+                                    component="input"
+                                    className={classes.field}
+                                />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                            <Field
-                                type="text"
-                                name="lastName"
-                                placeholder="Last name"
-                                component="input"
-                                className={classes.lastNameField}
-                            />
+                                <Field
+                                    type="text"
+                                    name="lastName"
+                                    placeholder="Last name"
+                                    component="input"
+                                    className={classes.lastNameField}
+                                />
                             </Grid>
-                            
+
                             <Grid item xs={12} md={6}>
                                 <Box className={classes.controlTitle}>
                                     Email <span class={classes.mendatory}>*</span>{" "}
@@ -148,43 +145,43 @@ const SignUp = (props) => {
 
 
                             <Grid item xs={12} md={6}>
-                            <Box className={classes.controlTitle}>
-                                Phone
+                                <Box className={classes.controlTitle}>
+                                    Phone
                             </Box>
-                            <Field
-                                type="phone"
-                                name="phone"
-                                component="input"
-                                className={classes.field}
-                            />
+                                <Field
+                                    type="phone"
+                                    name="phone"
+                                    component="input"
+                                    className={classes.field}
+                                />
 
                             </Grid>
 
                             <Grid item xs={12} md={6}>
-                            <Box className={classes.controlTitle}>
-                                Password
+                                <Box className={classes.controlTitle}>
+                                    Password
                     </Box>
-                            <Field
-                                type="password"
-                                name="password"
-                                component="input"
-                                placeholder="Minimum 8 chrs"
-                                className={classes.field}
-                            />
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    component="input"
+                                    placeholder="Minimum 8 chrs"
+                                    className={classes.field}
+                                />
                             </Grid>
-                           
+
 
                             <Grid item xs={12} md={6}>
-                            <Box className={classes.controlTitle}>
-                                Confirm password
+                                <Box className={classes.controlTitle}>
+                                    Confirm password
                             </Box>
-                            <Field
-                                type="password"
-                                name="re-password"
-                                component="input"
-                                placeholder="Re-type password"
-                                className={classes.field}
-                            />
+                                <Field
+                                    type="password"
+                                    name="re-password"
+                                    component="input"
+                                    placeholder="Re-type password"
+                                    className={classes.field}
+                                />
                             </Grid>
 
                             <Grid item xs={12} sm={12}>
@@ -200,12 +197,12 @@ const SignUp = (props) => {
                             </Grid>
 
                             <Grid item xs={12} sm={6}>
-                            <Button type="submit" className={classes.button}>CREATE ACCOUNT</Button>
+                                <Button type="submit" className={classes.button}>CREATE ACCOUNT</Button>
                             </Grid>
-                            </Grid>
+                        </Grid>
 
                     </form>
-                    
+
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -36,11 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MultilineTextFields(props) {
   const classes = useStyles();
-  // const [shipmentType, setShipmentType] = useState('FTL (Full Truck Load)');
-
-  // const handleChange = (event) => {
-  //   setShipmentType(event.target.value);
-  // };
 
   return (
       <form className={classes.root} noValidate autoComplete="off">
@@ -54,7 +49,6 @@ export default function MultilineTextFields(props) {
                   className={classes.textField}
                   value={props.value}
                   onChange={props.handleChange}
-                  //variant="outlined"
                 >
                   {shipmentTypes.map((option) => (
                       <MenuItem key={option.value} value={option.value}>

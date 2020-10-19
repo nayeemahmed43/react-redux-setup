@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fade, withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,62 +7,36 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import NavBar from './Basic/NavBar'
 import DatePickers from './Basic/DateBox';
 import TimePickers from './Basic/TimeBox';
 import MultilineTextFields from './Basic/DropDownInput';
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import CheckboxLabels from './Basic/CheckboxLabels';
 import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { submitFreightData } from '../actions/freightFormActions'
-
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    'label + &': {
-      marginTop: theme.spacing(2),
-    },
-    flexGrow: 1,
-  },
-  input: {
-    borderRadius: 2,
-    position: 'relative',
-    backgroundColor: theme.palette.common.white,
-    border: '1px solid #ced4da',
-    fontSize: 14,
-    width: '160px',
-    padding: '7px 30px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}))(InputBase);
+import { Field, reduxForm } from "redux-form";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
     border: '1px solid rgb(0 113 205)',
     margin: '5% 6% 10% 6%',
-    //paddingLeft: '15px',
   },
   form: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  field: {
+    width: "100%",
+    padding: "1vh 0",
+  },
+  inputLabel: {
+    marginTop: theme.spacing(1),
+    textAlign: "start"
   },
   title: {
     fontSize: 14,
@@ -80,45 +54,72 @@ const useStyles = makeStyles((theme) => ({
   },
   cardFooter: {
     [theme.breakpoints.up("lg")]: {
-      display: 'flex', 
-      marginLeft: '700px', 
-      marginTop: '8px', 
-      lineHeight: '50%' 
+      display: 'flex',
+      marginLeft: '700px',
+      marginTop: '8px',
+      lineHeight: '50%'
     },
     [theme.breakpoints.down("sm")]: {
-      marginLeft: '60px', 
+      marginLeft: '60px',
     }
   },
- 
+
 }));
+
+const RenderDatePicker = ({ input }) => (
+  <div>
+    <DatePickers
+      {...input}
+      className="form-control"
+      handleDate={date => input.onChange(moment(date).format("MM/DD/YYYY"))}
+      selected={input.value ? moment(input.value, "MM/DD/YYYY") : null}
+    />
+
+  </div>
+);
+
+const RenderTimePicker = ({ input }) => (
+  <div>
+    <TimePickers
+      {...input}
+      className="form-control"
+      handleTime={time => input.onChange(time)}
+    />
+  </div>
+);
+
+const RenderDropdown = ({ input }) => (
+  <div>
+    <MultilineTextFields
+      {...input}
+      className="form-control"
+      handleChange={e => input.onChange(e)}
+    />
+  </div>
+);
+
+const RenderCheckbox = ({ input, label }) => (
+  <div>
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={input.value ? true : false}
+          onChange={input.onChange}
+        />
+      }
+      label={label}
+    />
+  </div>
+)
 
 
 const Home = (props) => {
   const classes = useStyles();
-  const [freightData, setFreightData] = useState({
-    pickupLocation: "",
-    deliveryLocation: "",
-    pickupDate: "",
-    deliveryDate: "",
-    pickupStartingTime: "",
-    pickupEndingTime: "",
-    deliveryStartingTime: "",
-    deliveryEndingTime: "",
-    shipmentType: "FTL (Full Truck Load)",
-    fixedFrequentRoute: false
-  });
-
-  const [requestQuote, setRequestQuote] = useState(false)
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    props.submitForm(freightData)
-
-  }
+  const [requestQuote, setRequestQuote] = useState(false);
+  const { handleSubmit } = props;
 
   return (
     <div>
-      {/* <NavBar /> */}
 
       <Typography variant="h4" style={{ marginTop: "5%" }}>
         The Best Online Freight Marketplace
@@ -132,135 +133,144 @@ const Home = (props) => {
 
       <Card className={classes.root}>
         <CardContent>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form} noValidate onSubmit={handleSubmit( (freightFormValues) =>{
+            console.log(freightFormValues)
+          })}>
 
-          <Grid container spacing={1}>
-          <Grid item xs={12} sm={5} lg={2}>
-          <FormControl className={classes.margin}>
-              <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
-                Pickup location
-                </InputLabel>
-              <BootstrapInput
-                id="bootstrap-input"
-                placeholder="Country, City, Postcode"
-                value={freightData.pickupLocation}
-                onChange={(e) => setFreightData({ ...freightData, pickupLocation: e.target.value })}
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={5} lg={2}>
+                  <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
+                    Pickup location
+                  </InputLabel>
+                
+                  <Field
+                    type="text"
+                    name="pickupLocation"
+                    component="input"
+                    className={classes.field}
+                  />
+                
+              </Grid>
+
+              <Grid item xs={6} sm={3} lg={2}>
+              <Field 
+                name={"pickupDate"} 
+                component={RenderDatePicker} 
               />
-            </FormControl>
-          </Grid>
-         
-          <Grid item xs={6} sm={3} lg={2}>
-          <DatePickers
-              //className={classes.datePicker}
-              label="Pickup date"
-              handleDate={(e) => setFreightData({ ...freightData, pickupDate: e.target.value })}
-            />
-          </Grid>
+              </Grid>
 
-          <Grid item xs={6} sm={4} lg={2}>
-          <div className={classes.changeDate} style={{ margin: '15px 20px auto 20px' }} >
-              <small><b>+/-1 day</b></small> <br />
-              <small style={{color:"rgb(0 113 205)"}}>Change</small>
-          </div>
-          </Grid>
-          
-          <Grid item xs={4} sm={4} md={3} lg={2}>
-          <TimePickers
-              label="Pickup time"
-              handleTime={(e) => setFreightData({ ...freightData, pickupStartingTime: e.target.value })}
-            />
-          </Grid>
-
-          <Grid item xs={4} sm={4} md={3} lg={2}>
-            <TimePickers
-              handleTime={(e) => setFreightData({ ...freightData, pickupEndingTime: e.target.value })}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={8} md={6} lg={2}>
-            <MultilineTextFields
-              handleChange={(e) => setFreightData({ ...freightData, shipmentType: e.target.value })}
-              value={freightData.shipmentType}
-            />
-          </Grid>
-            
-          <Grid item xs={12} sm={6} lg={2}>
-          <FormControl className={classes.margin}>
-              <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
-                Delivery location
-                </InputLabel>
-              <BootstrapInput
-                id="bootstrap-input"
-                placeholder="Country, City, Postcode"
-                onChange={(e) => setFreightData({ ...freightData, deliveryLocation: e.target.value })}
-              />
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={6} sm={3} lg={2}>
-            <DatePickers
-              label="Delivery date"
-              handleDate={(e) => setFreightData({ ...freightData, deliveryDate: e.target.value })}
-            />
-          </Grid>
-
-          <Grid item xs={6} sm={2} lg={2}>
-          <div style={{ margin: '15px 20px auto 20px' }}>
-              <small><b>+/-1 day</b></small> <br />
-              <small style={{color:"rgb(0 113 205)"}}>Change</small>
-            </div>
-          </Grid>
-
-          <Grid item xs={4} sm={4} md={3} lg={2}>
-          <TimePickers
-              label="Delivery time"
-              handleTime={(e) => setFreightData({ ...freightData, deliveryStartingTime: e.target.value })}
-            />
-          </Grid>
-          <Grid item xs={4} sm={4} md={3} lg={2}>
-          <TimePickers
-              handleTime={(e) => setFreightData({ ...freightData, pickupEndingTime: e.target.value })}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={2}>
-          <div style={{marginTop: "20px"}}><CheckboxLabels handleCheckBox={() => setFreightData({ ...freightData, fixedFrequentRoute: true })}/></div>
-          </Grid>
-
-          {!requestQuote ? (<div style={{ display: 'flex' }}>
-            <div>
-            <small>Get an instant quote/price for your freight just by filling out the above information</small>
-            </div>
-            <div>
-              {/* <button onClick={() => setRequestQuote(true)}>test</button> */}
-              <CardActions>
-                  <Button 
-                  size="small" 
-                  style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginLeft: "80vh" }} 
-                  onClick={() => setRequestQuote(true)}
-                  type="submit">REQUEST QUOTE</Button>
-                </CardActions>
-            </div>
-          </div>) :
-
-            (<div style={{ display: 'flex' }}>
-              <div style={{lineHeight: '100%', marginTop: "10px", textAlign: 'left', marginLeft: '5px'}}>
-                <p style={{color:"rgb(0 113 205)"}}><b>REQUEST ANOTHER QUOTE</b></p>
-                <small>Quoted prices are indicative only</small>
-              </div>
-              <div>
-              <div className={classes.cardFooter} >
-                  <div>
-                  <h3>$ 2440.87</h3>
-                  <small>(incl. tax & fuel)</small>
-                  </div>
-                <CardActions>
-                  <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginTop: "10px" }} type="submit">ACCEPT & ORDER</Button>
-                </CardActions> 
+              <Grid item xs={6} sm={4} lg={2}>
+                <div className={classes.changeDate} style={{ margin: '15px 20px auto 20px' }} >
+                  <small><b>+/-1 day</b></small> <br />
+                  <small style={{ color: "rgb(0 113 205)" }}>Change</small>
                 </div>
-              </div>
-            </div>)}
-          </Grid>
+              </Grid>
+
+              <Grid item xs={4} sm={4} md={3} lg={2}>
+              <Field 
+                name={"pickupStartingTime"} 
+                component={RenderTimePicker} 
+              />
+              </Grid>
+
+              <Grid item xs={4} sm={4} md={3} lg={2}>
+              <Field 
+                name={"pickupEndingTime"} 
+                component={RenderTimePicker} 
+              />
+              </Grid>
+
+              <Grid item xs={12} sm={8} md={6} lg={2}>
+              <Field 
+                name={"shipmentType"} 
+                component={RenderDropdown} 
+              />
+              </Grid>
+
+              <Grid item xs={12} sm={6} lg={2}>
+
+                <InputLabel shrink htmlFor="bootstrap-input" className={classes.inputLabel}>
+                    Delivery location
+                </InputLabel>
+
+                  <Field
+                    type="text"
+                    name={"deliveryLocation"}
+                    component="input"
+                    className={classes.field}
+                  />
+              </Grid>
+
+              <Grid item xs={6} sm={3} lg={2}>
+              <Field 
+                name={"deliveryDate"} 
+                component={RenderDatePicker} 
+              />
+              </Grid>
+
+              <Grid item xs={6} sm={2} lg={2}>
+                <div style={{ margin: '15px 20px auto 20px' }}>
+                  <small><b>+/-1 day</b></small> <br />
+                  <small style={{ color: "rgb(0 113 205)" }}>Change</small>
+                </div>
+              </Grid>
+
+              <Grid item xs={4} sm={4} md={3} lg={2}>
+              <Field 
+                name={"deliveryStartingTime"} 
+                component={RenderTimePicker} 
+              />
+              </Grid>
+              <Grid item xs={4} sm={4} md={3} lg={2}>
+              <Field 
+                name={"deliveryEndingTime"} 
+                component={RenderTimePicker} 
+              />
+              </Grid>
+
+              <Grid item xs={12} md={6} lg={2}>
+                <div style={{ marginTop: "20px" }}>
+                <Field 
+                name="fixedFrequentRoute"
+                component={RenderCheckbox} 
+                label="Fixed Frequent Route"
+              />
+                </div>
+              </Grid>
+
+              {!requestQuote ? (<div style={{ display: 'flex' }}>
+                <div>
+                  <small>Get an instant quote/price for your freight just by filling out the above information</small>
+                </div>
+                <div>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginLeft: "80vh" }}
+                      onClick={() => setRequestQuote(true)}
+                      >REQUEST QUOTE</Button>
+                  </CardActions>
+                </div>
+              </div>) :
+
+                (<div style={{ display: 'flex' }}>
+                  <div style={{ lineHeight: '100%', marginTop: "10px", textAlign: 'left', marginLeft: '5px' }}>
+                    <p style={{ color: "rgb(0 113 205)" }}><b>REQUEST ANOTHER QUOTE</b></p>
+                    <small>Quoted prices are indicative only</small>
+                  </div>
+                  <div>
+                    <div className={classes.cardFooter} >
+                      <div>
+                        <h3>$ 2440.87</h3>
+                        <small>(incl. tax & fuel)</small>
+                      </div>
+                      <CardActions>
+                        <Button size="small" style={{ backgroundColor: "rgb(0 113 205)", color: "#fff", marginTop: "10px" }} type="submit">ACCEPT & ORDER</Button>
+                      </CardActions>
+                    </div>
+                  </div>
+                </div>)}
+            </Grid>
 
           </form>
         </CardContent>
@@ -270,9 +280,7 @@ const Home = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    submitForm: (freightData) => dispatch(submitFreightData(freightData))
-  }
-}
-export default connect(null,mapDispatchToProps)(Home);
+export default reduxForm({
+  form: "freightForm",
+  // validate: RegistrationFormValidate,
+})(Home);

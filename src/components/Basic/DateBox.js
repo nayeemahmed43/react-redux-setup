@@ -25,13 +25,10 @@ export default function DatePickers(props) {
   return (
     <form className={classes.container} noValidate>
       <FormControl>
-        <InputLabel shrink htmlFor="bootstrap-input" style={{marginTop:"8px", width:"100px", marginLeft:"36px"}}>
-          {props.label}
-        </InputLabel>
         <TextField
           id="date"
           type="date"
-          defaultValue="2017-05-24"
+          defaultValue="2020-05-24"
           className={classes.textField}
           onChange={props.handleDate}
           InputLabelProps={{

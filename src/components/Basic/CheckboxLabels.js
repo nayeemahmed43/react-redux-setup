@@ -8,7 +8,7 @@ export default function CheckboxLabels(props) {
 
   return (
     <FormGroup row>
-      <FormControlLabel control={<Checkbox name="checkedC" onChange={props.handleCheckBox}/>} label="Fixed frequent route"/>
+      <FormControlLabel control={<Checkbox name="checkedC" value="false" onChange={props.handleCheckBox}/>} label="Fixed frequent route"/>
     </FormGroup>
   );
 }
